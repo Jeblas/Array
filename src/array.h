@@ -30,7 +30,7 @@ public:
     array(size_t n, const T& t);
 
     //destructor
-    ~array();
+    ~array();// {}
 
     //ensure enough memory for n elements
     void reserve(size_t n);

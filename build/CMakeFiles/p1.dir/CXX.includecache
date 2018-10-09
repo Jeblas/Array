@@ -6,27 +6,19 @@
 
 #IncludeRegexTransform: 
 
-../src/simple_string.h
-iostream
--
-cstdint
--
-
-/home/jeblas/Assignments/ECE_4122/array/main.cc
-iostream
--
-
 /home/jeblas/Assignments/ECE_4122/array/src/array.cc
 array.h
 /home/jeblas/Assignments/ECE_4122/array/src/array.h
+simple_string.h
+/home/jeblas/Assignments/ECE_4122/array/src/simple_string.h
 
 /home/jeblas/Assignments/ECE_4122/array/src/array.h
 iostream
 -
 
-/home/jeblas/Assignments/ECE_4122/array/src/simple_string.cc
-cstring
+/home/jeblas/Assignments/ECE_4122/array/src/simple_string.h
+iostream
 -
-simple_string.h
+cstdint
 -
 
