@@ -22,16 +22,12 @@ public:
 	    m_reserved_size = m_size;
 	}
 	m_elements = (T*)malloc(sizeof(T) * m_reserved_size);
-        // TODO Add elements from init_list to m_elements
 	typename std::initializer_list<T>::iterator it;
 	std::size_t i = 0;
 	for (it = init_list.begin(); it != init_list.end(); ++it) {
-	    //(m_elements + i)->T(*it);
 	    new (m_elements + i) T(*it);
-            //std::copy(it, it, m_elements + i);
             ++i;
 	}
-        //std::copy(init_list.begin(), init_list.end(), m_elements);
     }
 
     //copy constructor
@@ -39,7 +35,7 @@ public:
         m_elements = (T*)malloc(sizeof(T) * m_reserved_size);
 	// TODO Copy elements into m_elements
 	for (int i = 0; i < rhs.m_size; ++i) {
-	   m_elements[i] = rhs.m_elements[i];
+	   new (m_elements + i) T(rhs.m_elements[i]);
 	}
     }
 
@@ -86,13 +82,27 @@ public:
     void push_back(const T&);
 
     //add to front of vector
-    void push_front(const T&);
+    void push_front(const T&) {
+       //check if resize is needed
+       //shift array by 1
+       //add element to 
+    
+    }
 
     //remove last element
-    void pop_back();
+    void pop_back() {
+        // up to ~T() to clear up memory and change assocciated variables.
+	// Skipping nullptr check since array always initializes and calls malloc()
+	if (m_size > 0) {
+	    m_elements[m_size - 1].~T();
+            --m_size;
+	}
+    }
 
     //remove first element
-    void pop_front();
+    void pop_front() {
+        //Call destructor, shift array to left, decrease m_size;    
+    }
 
     //return reference to first element
     T& front() const {
@@ -116,7 +126,9 @@ public:
     }
 
     //return number of elements
-    std::size_t length() const;
+    std::size_t length() const {
+        return m_size;
+    }
 
     //returns true if empty
     bool empty() const {
@@ -124,7 +136,9 @@ public:
     }
 
     //remove all elements
-    void clear();
+    void clear() {
+        // Call destructor on every element and change m_size to 0;
+    }
 
     //obtain iterator to first element
     array_iterator<T> begin() const;
@@ -138,6 +152,8 @@ public:
     //insert element right before itr
     void insert(const T&, const array_iterator<T>&);
 
+    // TODO Add copy operator overload
+    // TODO Add move operator overload
 private:
     T* m_elements;              //points to actual elements
     std::size_t m_size;              //number of elements

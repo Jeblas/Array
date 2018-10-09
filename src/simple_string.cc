@@ -10,6 +10,8 @@ u32 simple_string::create_count = 0;
 u32 simple_string::copy_count = 0;
 u32 simple_string::assign_count = 0;
 u32 simple_string::destruct_count = 0;
+u32 simple_string::move_const_count = 0;
+u32 simple_string::move_assign_count = 0;
 
 simple_string::simple_string() : st(nullptr) {
     default_count++;
@@ -54,12 +56,17 @@ void simple_string::initialize_counts() {
     copy_count = 0;
     assign_count = 0;
     destruct_count = 0;
+    move_const_count = 0;
+    move_assign_count = 0;
 }
 
 void simple_string::print_counts() {
     std::cout << "Default: " << default_count << "\n";
     std::cout << "Create: " << create_count << "\n";
     std::cout << "Copy: " << copy_count << "\n";
+    std::cout << "Destruct: " << copy_count << "\n";
+    std::cout << "Move_Constr: " << move_const_count << "\n";
+    std::cout << "Move_Assign: " << move_assign_count << "\n";
     std::cout << "Assign: " << assign_count << std::endl;
 }
 

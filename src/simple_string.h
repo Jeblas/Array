@@ -30,6 +30,8 @@ private:
     static u32 copy_count;
     static u32 assign_count;
     static u32 destruct_count;
+    static u32 move_const_count;
+    static u32 move_assign_count;
 
 };
 

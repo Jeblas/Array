@@ -16,8 +16,9 @@
 //#define TEST_PUSH_FRONT_VEC
 //#define TEST_PUSH_FRONT_WITH_RESERVE
 //#define TEST_POP_BACK
-#define TEST_INITIALIZER_LIST
+//#define TEST_INITIALIZER_LIST
 //#define TEST_POP_FRONT
+#define TEST_COPY_CONSTRUCTOR
 
 using std::vector;
 //test your code here
@@ -248,6 +249,45 @@ int main() {
     }
 #endif
 
+#ifdef TEST_COPY_CONSTRUCTOR
+
+    //Test initializer list
+    //
+    //Vector                  Array
+    //Default: 0              Default: 0
+    //Create: 0               Create: 0
+    //Copy: 2                 Copy: 2
+    //Assign: 0               Assign: 0
+    //Destruct: 2             Destruct: 2
+    //Move Construct: 0       Move Construct: 0
+    //Move Assign: 0          Move Assign: 0
+
+    {
+        simple_string a;
+        simple_string b;
+        simple_string c;
+ 
+        std::cout << "Vector" << std::endl;
+        vector<simple_string> vec({a, b});
+
+        simple_string::initialize_counts();
+        vector<simple_string> vec1(vec);
+        simple_string::print_counts();
+
+        std::cout << "Array" << std::endl;
+        array<simple_string> arr({a, b});
+
+        simple_string::initialize_counts();
+        array<simple_string> arr1(arr);
+        simple_string::print_counts();
+        /*	
+	std::cout << vec1[0] << std::endl;
+	std::cout << vec1[1] << std::endl;
+	std::cout << arr[0] << std::endl;
+	std::cout << arr[1] << std::endl;
+	*/
+    }
+#endif
 
     return 0;
 }
