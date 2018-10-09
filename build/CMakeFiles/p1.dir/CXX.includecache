@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/jeblas/usb/p1/src/array.cc
+array.h
+/home/jeblas/usb/p1/src/array.h
+
+/home/jeblas/usb/p1/src/array.h
+iostream
+-
+
