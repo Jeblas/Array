@@ -2,9 +2,9 @@
 
 #include <iostream>
 
-//students should not change this
+constexpr std::size_t INIT_RES_SIZE = 16;
 
-using size_t = std::size_t;
+//using size_t = std::size_t;
 
 template<typename T> class array_iterator;
 
@@ -12,28 +12,58 @@ template<typename T>
 class array {
 public:
     //default constructor
-    array();
+    array() : m_size(0), m_reserved_size(INIT_RES_SIZE) {
+	m_elements = (T*)malloc(sizeof(T) * m_reserved_size);
+    }
 
     //initialize array with elements in initializer
-    array(std::initializer_list<T>);
+    array(std::initializer_list<T> init_list) : m_size(init_list.size()), m_reserved_size(INIT_RES_SIZE) {
+	if (m_size > m_reserved_size) {
+	    m_reserved_size = m_size;
+	}
+	m_elements = (T*)malloc(sizeof(T) * m_reserved_size);
+        // TODO Add elements from init_list to m_elements
+    }
 
     //copy constructor
-    array(const array&);
+    array(const array& rhs) : m_size(rhs.m_size), m_reserved_size(rhs.m_reserved_size) {
+        m_elements = (T*)malloc(sizeof(T) * m_reserved_size);
+	// TODO Copy elements into m_elements
+    }
 
     //move constructor
-    array(array&&);
+    array(array&& rhs) : m_size(rhs.m_size), m_reserved_size(rhs.m_reserved_size), m_elements(rhs.m_elements) {
+        //rhs.m_reserved_size = 0;
+	rhs.m_elements = nullptr;
+    }
 
     //construct with initial "reserved" size
-    array(size_t);
+    array(std::size_t num_res) : m_size(0), m_reserved_size(num_res) {
+        m_elements = (T*)malloc(sizeof(T) * m_reserved_size);
+    }
 
     //construct with n copies of t
-    array(size_t n, const T& t);
+    array(std::size_t n, const T& t) : m_size(n), m_reserved_size(INIT_RES_SIZE) {
+	if (n > INIT_RES_SIZE) {
+	    m_reserved_size = n;
+	}
+	m_elements = (T*)malloc(sizeof(T) * m_reserved_size);
+	//TODO Copy t into m_elements
+    }
 
     //destructor
-    ~array();// {}
+    // TODO Check if correct
+    ~array() {
+        if (m_elements != nullptr) {
+	    for (int i = 0; i < m_size; ++i) {
+	        (m_elements + i)->~T();
+	    }
+	    free(m_elements);
+	}
+    }
 
     //ensure enough memory for n elements
-    void reserve(size_t n);
+    void reserve(std::size_t n);
 
     //add to end of vector
     void push_back(const T&);
@@ -54,13 +84,13 @@ public:
     T& back() const;
 
     //return reference to specified element
-    const T& operator[](size_t) const;
+    const T& operator[](std::size_t) const;
 
     //return reference to specified element
-    T& operator[](size_t);
+    T& operator[](std::size_t);
 
     //return number of elements
-    size_t length() const;
+    std::size_t length() const;
 
     //returns true if empty
     bool empty() const;
@@ -82,8 +112,8 @@ public:
 
 private:
     T* m_elements;              //points to actual elements
-    size_t m_size;              //number of elements
-    size_t m_reserved_size;     //number of reserved elements
+    std::size_t m_size;              //number of elements
+    std::size_t m_reserved_size;     //number of reserved elements
 };
 
 template<typename T>

@@ -14,7 +14,7 @@ int main() {
 
 	simple_string::initialize_counts();
         //array<simple_string> my_array;
-	array<simple_string> my_array(4444);
+	array<simple_string> my_array(5);
 	simple_string::print_counts();
     return 0;
 }

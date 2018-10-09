@@ -2,8 +2,8 @@
 #include "simple_string.h"
 
 //default constructor
-template class array<simple_string>;
-
+//template class array<simple_string>;
+/*
 template <typename T>
 array<T>::array() {
     m_reserved_size = 16;
@@ -97,3 +97,5 @@ template <typename T>
 T& array<T>::back() const{
     return *(m_elements + m_size);  
 }
+
+*/
