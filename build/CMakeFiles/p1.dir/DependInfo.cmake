@@ -4,9 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/jeblas/usb/p1/main.cc" "/home/jeblas/usb/p1/build/CMakeFiles/p1.dir/main.cc.o"
-  "/home/jeblas/usb/p1/src/array.cc" "/home/jeblas/usb/p1/build/CMakeFiles/p1.dir/src/array.cc.o"
-  "/home/jeblas/usb/p1/src/simple_string.cc" "/home/jeblas/usb/p1/build/CMakeFiles/p1.dir/src/simple_string.cc.o"
+  "/home/jeblas/Assignments/ECE_4122/array/main.cc" "/home/jeblas/Assignments/ECE_4122/array/build/CMakeFiles/p1.dir/main.cc.o"
+  "/home/jeblas/Assignments/ECE_4122/array/src/array.cc" "/home/jeblas/Assignments/ECE_4122/array/build/CMakeFiles/p1.dir/src/array.cc.o"
+  "/home/jeblas/Assignments/ECE_4122/array/src/simple_string.cc" "/home/jeblas/Assignments/ECE_4122/array/build/CMakeFiles/p1.dir/src/simple_string.cc.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

@@ -6,5 +6,5 @@ CXX_FLAGS =  -Werror   -std=gnu++17
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/jeblas/usb/p1/src 
+CXX_INCLUDES = -I/home/jeblas/Assignments/ECE_4122/array/src 
 

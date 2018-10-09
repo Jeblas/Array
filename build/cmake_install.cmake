@@ -1,4 +1,4 @@
-# Install script for directory: /home/jeblas/usb/p1
+# Install script for directory: /home/jeblas/Assignments/ECE_4122/array
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/jeblas/usb/p1/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/jeblas/Assignments/ECE_4122/array/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -6,11 +6,27 @@
 
 #IncludeRegexTransform: 
 
-/home/jeblas/usb/p1/src/array.cc
-array.h
-/home/jeblas/usb/p1/src/array.h
-
-/home/jeblas/usb/p1/src/array.h
+../src/simple_string.h
 iostream
+-
+cstdint
+-
+
+/home/jeblas/Assignments/ECE_4122/array/main.cc
+iostream
+-
+
+/home/jeblas/Assignments/ECE_4122/array/src/array.cc
+array.h
+/home/jeblas/Assignments/ECE_4122/array/src/array.h
+
+/home/jeblas/Assignments/ECE_4122/array/src/array.h
+iostream
+-
+
+/home/jeblas/Assignments/ECE_4122/array/src/simple_string.cc
+cstring
+-
+simple_string.h
 -
 

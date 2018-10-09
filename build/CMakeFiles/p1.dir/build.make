@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/jeblas/usb/p1
+CMAKE_SOURCE_DIR = /home/jeblas/Assignments/ECE_4122/array
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/jeblas/usb/p1/build
+CMAKE_BINARY_DIR = /home/jeblas/Assignments/ECE_4122/array/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/p1.dir/depend.make
@@ -59,42 +59,42 @@ include CMakeFiles/p1.dir/flags.make
 
 CMakeFiles/p1.dir/src/array.cc.o: CMakeFiles/p1.dir/flags.make
 CMakeFiles/p1.dir/src/array.cc.o: ../src/array.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/jeblas/usb/p1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/p1.dir/src/array.cc.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/p1.dir/src/array.cc.o -c /home/jeblas/usb/p1/src/array.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/jeblas/Assignments/ECE_4122/array/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/p1.dir/src/array.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/p1.dir/src/array.cc.o -c /home/jeblas/Assignments/ECE_4122/array/src/array.cc
 
 CMakeFiles/p1.dir/src/array.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/p1.dir/src/array.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/jeblas/usb/p1/src/array.cc > CMakeFiles/p1.dir/src/array.cc.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/jeblas/Assignments/ECE_4122/array/src/array.cc > CMakeFiles/p1.dir/src/array.cc.i
 
 CMakeFiles/p1.dir/src/array.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/p1.dir/src/array.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/jeblas/usb/p1/src/array.cc -o CMakeFiles/p1.dir/src/array.cc.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/jeblas/Assignments/ECE_4122/array/src/array.cc -o CMakeFiles/p1.dir/src/array.cc.s
 
 CMakeFiles/p1.dir/src/simple_string.cc.o: CMakeFiles/p1.dir/flags.make
 CMakeFiles/p1.dir/src/simple_string.cc.o: ../src/simple_string.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/jeblas/usb/p1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/p1.dir/src/simple_string.cc.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/p1.dir/src/simple_string.cc.o -c /home/jeblas/usb/p1/src/simple_string.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/jeblas/Assignments/ECE_4122/array/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/p1.dir/src/simple_string.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/p1.dir/src/simple_string.cc.o -c /home/jeblas/Assignments/ECE_4122/array/src/simple_string.cc
 
 CMakeFiles/p1.dir/src/simple_string.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/p1.dir/src/simple_string.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/jeblas/usb/p1/src/simple_string.cc > CMakeFiles/p1.dir/src/simple_string.cc.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/jeblas/Assignments/ECE_4122/array/src/simple_string.cc > CMakeFiles/p1.dir/src/simple_string.cc.i
 
 CMakeFiles/p1.dir/src/simple_string.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/p1.dir/src/simple_string.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/jeblas/usb/p1/src/simple_string.cc -o CMakeFiles/p1.dir/src/simple_string.cc.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/jeblas/Assignments/ECE_4122/array/src/simple_string.cc -o CMakeFiles/p1.dir/src/simple_string.cc.s
 
 CMakeFiles/p1.dir/main.cc.o: CMakeFiles/p1.dir/flags.make
 CMakeFiles/p1.dir/main.cc.o: ../main.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/jeblas/usb/p1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/p1.dir/main.cc.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/p1.dir/main.cc.o -c /home/jeblas/usb/p1/main.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/jeblas/Assignments/ECE_4122/array/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/p1.dir/main.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/p1.dir/main.cc.o -c /home/jeblas/Assignments/ECE_4122/array/main.cc
 
 CMakeFiles/p1.dir/main.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/p1.dir/main.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/jeblas/usb/p1/main.cc > CMakeFiles/p1.dir/main.cc.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/jeblas/Assignments/ECE_4122/array/main.cc > CMakeFiles/p1.dir/main.cc.i
 
 CMakeFiles/p1.dir/main.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/p1.dir/main.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/jeblas/usb/p1/main.cc -o CMakeFiles/p1.dir/main.cc.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/jeblas/Assignments/ECE_4122/array/main.cc -o CMakeFiles/p1.dir/main.cc.s
 
 # Object files for target p1
 p1_OBJECTS = \
@@ -110,7 +110,7 @@ p1: CMakeFiles/p1.dir/src/simple_string.cc.o
 p1: CMakeFiles/p1.dir/main.cc.o
 p1: CMakeFiles/p1.dir/build.make
 p1: CMakeFiles/p1.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/jeblas/usb/p1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable p1"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/jeblas/Assignments/ECE_4122/array/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable p1"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/p1.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -123,6 +123,6 @@ CMakeFiles/p1.dir/clean:
 .PHONY : CMakeFiles/p1.dir/clean
 
 CMakeFiles/p1.dir/depend:
-	cd /home/jeblas/usb/p1/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/jeblas/usb/p1 /home/jeblas/usb/p1 /home/jeblas/usb/p1/build /home/jeblas/usb/p1/build /home/jeblas/usb/p1/build/CMakeFiles/p1.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/jeblas/Assignments/ECE_4122/array/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/jeblas/Assignments/ECE_4122/array /home/jeblas/Assignments/ECE_4122/array /home/jeblas/Assignments/ECE_4122/array/build /home/jeblas/Assignments/ECE_4122/array/build /home/jeblas/Assignments/ECE_4122/array/build/CMakeFiles/p1.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/p1.dir/depend
 
