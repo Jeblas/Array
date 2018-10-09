@@ -14,9 +14,9 @@
 //#define TEST_PUSH_BACK_NEW_VEC
 //#define TEST_CLEAR
 //#define TEST_PUSH_FRONT_VEC
-#define TEST_PUSH_FRONT_WITH_RESERVE
+//#define TEST_PUSH_FRONT_WITH_RESERVE
 //#define TEST_POP_BACK
-//#define TEST_INITIALIZER_LIST
+#define TEST_INITIALIZER_LIST
 //#define TEST_POP_FRONT
 
 using std::vector;
@@ -230,7 +230,7 @@ int main() {
         simple_string a;
         simple_string b;
         simple_string c;
-
+ 
         std::cout << "Vector" << std::endl;
         simple_string::initialize_counts();
         vector<simple_string> vec({a, b});
@@ -240,6 +240,11 @@ int main() {
         simple_string::initialize_counts();
         array<simple_string> arr({a, b});
         simple_string::print_counts();
+
+	std::cout << vec[0] << std::endl;
+	std::cout << vec[1] << std::endl;
+	std::cout << arr[0] << std::endl;
+	std::cout << arr[1] << std::endl;
     }
 #endif
 

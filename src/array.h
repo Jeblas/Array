@@ -23,12 +23,24 @@ public:
 	}
 	m_elements = (T*)malloc(sizeof(T) * m_reserved_size);
         // TODO Add elements from init_list to m_elements
+	typename std::initializer_list<T>::iterator it;
+	std::size_t i = 0;
+	for (it = init_list.begin(); it != init_list.end(); ++it) {
+	    //(m_elements + i)->T(*it);
+	    new (m_elements + i) T(*it);
+            //std::copy(it, it, m_elements + i);
+            ++i;
+	}
+        //std::copy(init_list.begin(), init_list.end(), m_elements);
     }
 
     //copy constructor
     array(const array& rhs) : m_size(rhs.m_size), m_reserved_size(rhs.m_reserved_size) {
         m_elements = (T*)malloc(sizeof(T) * m_reserved_size);
 	// TODO Copy elements into m_elements
+	for (int i = 0; i < rhs.m_size; ++i) {
+	   m_elements[i] = rhs.m_elements[i];
+	}
     }
 
     //move constructor
@@ -49,6 +61,10 @@ public:
 	}
 	m_elements = (T*)malloc(sizeof(T) * m_reserved_size);
 	//TODO Copy t into m_elements
+	for (int i = 0; i < m_size; ++i) {
+	    //*(m_elements + i) = t;
+	    m_elements[i] = t;
+	}
     }
 
     //destructor
@@ -63,7 +79,8 @@ public:
     }
 
     //ensure enough memory for n elements
-    void reserve(std::size_t n);
+    void reserve(std::size_t n) {
+    }
 
     //add to end of vector
     void push_back(const T&);
@@ -78,22 +95,33 @@ public:
     void pop_front();
 
     //return reference to first element
-    T& front() const;
+    T& front() const {
+        return *(m_elements);
+    }
 
     //return reference to last element
-    T& back() const;
+    T& back() const {
+        return *(m_elements + m_size - 1);
+    }
 
     //return reference to specified element
-    const T& operator[](std::size_t) const;
+    // Array on right hand
+    const T& operator[](std::size_t index) const {
+        return m_elements[index];
+    }
 
     //return reference to specified element
-    T& operator[](std::size_t);
+    T& operator[](std::size_t index) {
+       return m_elements[index];
+    }
 
     //return number of elements
     std::size_t length() const;
 
     //returns true if empty
-    bool empty() const;
+    bool empty() const {
+        return (m_size == 0);
+    }
 
     //remove all elements
     void clear();
