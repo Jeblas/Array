@@ -263,8 +263,8 @@ int main() {
     //Move Assign: 0          Move Assign: 0
 
     {
-	simple_string a = "wasd";
-        simple_string b = "dsaw";
+	simple_string a("wasd");
+        simple_string b("dsaw");
         simple_string c;
  
         std::cout << "Vector" << std::endl;
