@@ -18,7 +18,7 @@
 //#define TEST_POP_BACK
 //#define TEST_INITIALIZER_LIST
 //#define TEST_POP_FRONT
-#define TEST_COPY_CONSTRUCTOR
+#define TEST_INITIALIZER_CONSTRUCTOR
 
 using std::vector;
 //test your code here
@@ -249,7 +249,7 @@ int main() {
     }
 #endif
 
-#ifdef TEST_COPY_CONSTRUCTOR
+#ifdef TEST_INITIALIZER_CONSTRUCTOR
 
     //Test initializer list
     //

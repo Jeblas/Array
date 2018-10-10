@@ -78,8 +78,6 @@ public:
 	    m_reserved_size = n;
 	    m_elements = (T*)malloc(sizeof(T) * n);
 
-	    //TODO copy old array to new malloc and free old
-	    //
 	    for (int i = 0; i < m_size; ++i) {
 	        new (m_elements + i) T(old_elements[i]);
 		old_elements[i].~T();
@@ -89,9 +87,11 @@ public:
     }
 
     //add to end of vector
+    // TODO 
     void push_back(const T&);
 
     //add to front of vector
+    //TODO
     void push_front(const T&) {
        //check if resize is needed
        //shift array by 1
@@ -110,6 +110,7 @@ public:
     }
 
     //remove first element
+    //TODO
     void pop_front() {
         //Call destructor, shift array to left, decrease m_size;    
     }
@@ -154,17 +155,25 @@ public:
     //remove all elements
     void clear() {
         // Call destructor on every element and change m_size to 0;
+	for (int i = 0; i < m_size; ++i) {
+	   m_elements[i].~T();
+	}
+	m_size = 0;
     }
 
     //obtain iterator to first element
+    //TODO
     array_iterator<T> begin() const;
 
     //obtain iterator to one beyond element
+    //TODO
     array_iterator<T> end() const;
 
+    //TODO
     //remove specified element
     void erase(const array_iterator<T>&);
 
+    //TODO
     //insert element right before itr
     void insert(const T&, const array_iterator<T>&);
 
