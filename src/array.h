@@ -25,6 +25,7 @@ public:
 	typename std::initializer_list<T>::iterator it;
 	std::size_t i = 0;
 	for (it = init_list.begin(); it != init_list.end(); ++it) {
+	    //TODO Copy T() or move T()??
 	    new (m_elements + i) T(*it);
             ++i;
 	}
@@ -33,7 +34,6 @@ public:
     //copy constructor
     array(const array& rhs) : m_size(rhs.m_size), m_reserved_size(rhs.m_reserved_size) {
         m_elements = (T*)malloc(sizeof(T) * m_reserved_size);
-	// TODO Copy elements into m_elements
 	for (int i = 0; i < rhs.m_size; ++i) {
 	   new (m_elements + i) T(rhs.m_elements[i]);
 	}
@@ -41,7 +41,6 @@ public:
 
     //move constructor
     array(array&& rhs) : m_size(rhs.m_size), m_reserved_size(rhs.m_reserved_size), m_elements(rhs.m_elements) {
-        //rhs.m_reserved_size = 0;
 	rhs.m_elements = nullptr;
     }
 
@@ -55,6 +54,7 @@ public:
 	if (n > INIT_RES_SIZE) {
 	    m_reserved_size = n;
 	}
+
 	m_elements = (T*)malloc(sizeof(T) * m_reserved_size);
 	for (int i = 0; i < m_size; ++i) {
 	    new (m_elements + i) T(t);
@@ -67,22 +67,24 @@ public:
 	    for (int i = 0; i < m_size; ++i) {
 	        (m_elements + i)->~T();
 	    }
+	    free(m_elements);
 	}
-	free(m_elements);
     }
 
     //ensure enough memory for n elements
     void reserve(std::size_t n) {
 	if (n > m_reserved_size) {
+	    // TODO call move operator instead of copy operator	
 	    T* old_elements = m_elements;
 	    m_reserved_size = n;
 	    m_elements = (T*)malloc(sizeof(T) * n);
 
+	    // Copy or move elements into 
 	    for (int i = 0; i < m_size; ++i) {
 	        new (m_elements + i) T(old_elements[i]);
-		old_elements[i].~T();
+		//old_elements[i].~T();
 	    }
-	    free(old_elements);
+	    //free(old_elements);
 	}
     }
 
@@ -99,14 +101,14 @@ public:
     //add to front of vector
     //TODO might not need to allocate memory if sufficient amount of space.
     void push_front(const T& t) {
-        T* old_elements = m_elements;
         if (m_size == m_reserved_size) {
+             T* old_elements = m_elements;
 	     m_reserved_size *= 2;
+	     m_elements = (T*)malloc(sizeof(T) * m_reserved_size);
 	}
-	m_elements = (T*)malloc(sizeof(T) * m_reserved_size);
         new (m_elements) T(t);
 	for (int i = 0; i < m_size; ++i) {
-	    new (m_elements + 1 + i) T(old_elements[i]);
+	   // new (m_elements + 1 + i) T(old_elements[i]);
 	    //old_elements[i].~T();
 	}
 	// TODO do I neeed to call destructor and free of will array destructor automatically do that
@@ -129,6 +131,11 @@ public:
     void pop_front() {
         //Call destructor, shift array to left, decrease m_size;   
 	if (m_size > 0) {
+	    m_elements -> ~T();
+	    for (int i = 1; i < m_size; ++i) {
+	        m_elements[i-1] = m_elements[i];
+	    }
+	    --m_size;
 	}
     }
 
@@ -195,7 +202,27 @@ public:
     void insert(const T&, const array_iterator<T>&);
 
     // TODO Add copy operator overload
+    T& operator=(const T& rhs) {
+        if (this != &rhs) {
+	    m_size = rhs.size;
+	    m_reserved_size = rhs.m_reserved_size;
+            m_elements = (T*)malloc(sizeof(T) * m_reserved_size);
+	    for (int i = 0; i < rhs.m_size; ++i) {
+	       new (m_elements + i) T(rhs.m_elements[i]);
+	    }
+	}
+	return *this;
+    }
     // TODO Add move operator overload
+    T& operator=(T&& rhs) {
+        if (this != &rhs) {
+	    m_size = rhs.m_size;
+	    m_reserved_size = rhs.m_reserved_size;
+	    m_elements = rhs.m_elements;
+	    rhs.m_elements = nullptr;
+	}
+	return *this;
+    }
 private:
     T* m_elements;              //points to actual elements
     std::size_t m_size;              //number of elements
