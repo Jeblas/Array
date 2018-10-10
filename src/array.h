@@ -17,7 +17,8 @@ public:
     }
 
     //initialize array with elements in initializer
-    array(std::initializer_list<T> init_list) : m_size(init_list.size()), m_reserved_size(INIT_RES_SIZE) {
+    // initial reserved size = m_size
+    array(std::initializer_list<T> init_list) : m_size(init_list.size()), m_reserved_size(init_list.size()) {
 	if (m_size > m_reserved_size) {
 	    m_reserved_size = m_size;
 	}
@@ -74,6 +75,7 @@ public:
     //ensure enough memory for n elements
     void reserve(std::size_t n) {
 	if (n > m_reserved_size) {
+        // TODO invalidate iterator
 	    // TODO call move operator instead of copy operator	
 	    T* old_elements = m_elements;
 	    m_reserved_size = n;
@@ -92,7 +94,9 @@ public:
     void push_back(const T& t) {
         if (m_size == m_reserved_size) {
 	     reserve(m_reserved_size * 2);
+
         }
+        //TODO invalidate end() iterator
 	// Add new element to the back of m_elements
         new (m_elements + m_size) T(t);
 	++m_size;
@@ -152,17 +156,11 @@ public:
     //return reference to specified element
     // Array on right hand
     const T& operator[](std::size_t index) const {
-	if (index > m_size - 1) {
-	    return m_elements[m_size - 1];
-	}
         return m_elements[index];
     }
 
     //return reference to specified element
     T& operator[](std::size_t index) {
-	if (index > m_size - 1) {
-	    return m_elements[m_size - 1];
-	}
         return m_elements[index];
     }
 
@@ -195,10 +193,12 @@ public:
 
     //TODO
     //remove specified element
+    // invalidate iterate and all after
     void erase(const array_iterator<T>&);
 
     //TODO
     //insert element right before itr
+    // TODO if resize all iterators invalid, invalidate iterators after instert
     void insert(const T&, const array_iterator<T>&);
 
     // TODO Add copy operator overload

@@ -269,6 +269,8 @@ int main() {
  
         std::cout << "--Vector--" << std::endl;
         vector<simple_string> vec({a, b});
+        vec.push_back(c);
+        vector<simple_string> vec2;
 
         simple_string::initialize_counts();
         vector<simple_string> vec1(vec);
