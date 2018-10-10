@@ -87,16 +87,31 @@ public:
     }
 
     //add to end of vector
-    // TODO 
-    void push_back(const T&);
+    void push_back(const T& t) {
+        if (m_size == m_reserved_size) {
+	     reserve(m_reserved_size * 2);
+        }
+	// Add new element to the back of m_elements
+        new (m_elements + m_size) T(t);
+	++m_size;
+    }
 
     //add to front of vector
     //TODO
-    void push_front(const T&) {
-       //check if resize is needed
-       //shift array by 1
-       //add element to 
-    
+    void push_front(const T& t) {
+        T* old_elements = m_elements;
+        if (m_size == m_reserved_size) {
+	     m_reserved_size *= 2;
+	}
+	m_elements = (T*)malloc(sizeof(T) * m_reserved_size);
+        new (m_elements) T(t);
+	for (int i = 0; i < m_size; ++i) {
+	    new (m_elements + 1 + i) T(old_elements[i]);
+	    //old_elements[i].~T();
+	}
+	// TODO do I neeed to call destructor and free of will array destructor automatically do that
+        // free(old_elements);
+	++m_size;
     }
 
     //remove last element
