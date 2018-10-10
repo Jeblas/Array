@@ -285,8 +285,9 @@ int main() {
 	std::cout << vec1[1] << std::endl;
 	std::cout << arr1.front() << std::endl;
 	std::cout << arr1.back() << std::endl;
-	
-    }
+        std::cout << "\a" << std::endl;	
+    }	
+    
 #endif
 
     return 0;
