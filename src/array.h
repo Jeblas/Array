@@ -97,7 +97,7 @@ public:
     }
 
     //add to front of vector
-    //TODO
+    //TODO might not need to allocate memory if sufficient amount of space.
     void push_front(const T& t) {
         T* old_elements = m_elements;
         if (m_size == m_reserved_size) {
@@ -127,7 +127,9 @@ public:
     //remove first element
     //TODO
     void pop_front() {
-        //Call destructor, shift array to left, decrease m_size;    
+        //Call destructor, shift array to left, decrease m_size;   
+	if (m_size > 0) {
+	}
     }
 
     //return reference to first element
