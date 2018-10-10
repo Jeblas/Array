@@ -267,14 +267,14 @@ int main() {
         simple_string b("dsaw");
         simple_string c;
  
-        std::cout << "Vector" << std::endl;
+        std::cout << "--Vector--" << std::endl;
         vector<simple_string> vec({a, b});
 
         simple_string::initialize_counts();
         vector<simple_string> vec1(vec);
         simple_string::print_counts();
 
-        std::cout << "Array" << std::endl;
+        std::cout << "--Array--" << std::endl;
         array<simple_string> arr({a, b});
 
         simple_string::initialize_counts();
