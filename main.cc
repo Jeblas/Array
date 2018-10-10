@@ -263,8 +263,8 @@ int main() {
     //Move Assign: 0          Move Assign: 0
 
     {
-        simple_string a;
-        simple_string b;
+	simple_string a = "wasd";
+        simple_string b = "dsaw";
         simple_string c;
  
         std::cout << "Vector" << std::endl;
@@ -280,12 +280,12 @@ int main() {
         simple_string::initialize_counts();
         array<simple_string> arr1(arr);
         simple_string::print_counts();
-        /*	
+        	
 	std::cout << vec1[0] << std::endl;
 	std::cout << vec1[1] << std::endl;
-	std::cout << arr[0] << std::endl;
-	std::cout << arr[1] << std::endl;
-	*/
+	std::cout << arr1.front() << std::endl;
+	std::cout << arr1.back() << std::endl;
+	
     }
 #endif
 

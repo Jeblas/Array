@@ -56,26 +56,36 @@ public:
 	    m_reserved_size = n;
 	}
 	m_elements = (T*)malloc(sizeof(T) * m_reserved_size);
-	//TODO Copy t into m_elements
 	for (int i = 0; i < m_size; ++i) {
-	    //*(m_elements + i) = t;
-	    m_elements[i] = t;
+	    new (m_elements + i) T(t);
 	}
     }
 
     //destructor
-    // TODO Check if correct
     ~array() {
         if (m_elements != nullptr) {
 	    for (int i = 0; i < m_size; ++i) {
 	        (m_elements + i)->~T();
 	    }
-	    free(m_elements);
 	}
+	free(m_elements);
     }
 
     //ensure enough memory for n elements
     void reserve(std::size_t n) {
+	if (n > m_reserved_size) {
+	    T* old_elements = m_elements;
+	    m_reserved_size = n;
+	    m_elements = (T*)malloc(sizeof(T) * n);
+
+	    //TODO copy old array to new malloc and free old
+	    //
+	    for (int i = 0; i < m_size; ++i) {
+	        new (m_elements + i) T(old_elements[i]);
+		old_elements[i].~T();
+	    }
+	    free(old_elements);
+	}
     }
 
     //add to end of vector
@@ -106,23 +116,29 @@ public:
 
     //return reference to first element
     T& front() const {
-        return *(m_elements);
+        return m_elements[0];
     }
 
     //return reference to last element
     T& back() const {
-        return *(m_elements + m_size - 1);
+        return m_elements[m_size - 1];
     }
 
     //return reference to specified element
     // Array on right hand
     const T& operator[](std::size_t index) const {
+	if (index > m_size - 1) {
+	    return m_elements[m_size - 1];
+	}
         return m_elements[index];
     }
 
     //return reference to specified element
     T& operator[](std::size_t index) {
-       return m_elements[index];
+	if (index > m_size - 1) {
+	    return m_elements[m_size - 1];
+	}
+        return m_elements[index];
     }
 
     //return number of elements
