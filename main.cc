@@ -11,7 +11,7 @@
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 //comment/uncomment these lines to enable tests
-//define TEST_PUSH_BACK_NEW_VEC
+//#define TEST_PUSH_BACK_NEW_VEC
 //#define TEST_CLEAR
 //#define TEST_PUSH_FRONT_VEC
 //#define TEST_PUSH_FRONT_WITH_RESERVE
@@ -282,7 +282,7 @@ int main() {
 
         std::cout << "--Array--" << std::endl;
         array<simple_string> arr({a, b});
-
+        arr.push_back(c);
         simple_string::initialize_counts();
         array<simple_string> arr1(arr);
         simple_string::print_counts();
@@ -312,6 +312,24 @@ int main() {
         array<simple_string> arrwasd(2);
         bool temp_bool = (test_arr.begin()++ == test_arr.end());
         std::cout << temp_bool << std::endl;
+        std::cout << "===============\n";
+
+
+        simple_string::initialize_counts();
+        vector<simple_string> t_vec(5);
+	auto it_v = t_vec.begin();
+	++it_v;
+	t_vec.erase(it_v);
+        simple_string::print_counts();
+
+        std::cout << "-------\n";
+    
+        simple_string::initialize_counts();
+        array<simple_string> t_arr(5);
+	auto it_a = t_arr.begin();
+	++it_a;
+	t_arr.erase(it_a);
+        simple_string::print_counts();
 
     }    
     

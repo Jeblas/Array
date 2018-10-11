@@ -131,7 +131,7 @@ public:
     void pop_front() {
         //Call destructor, shift array to left, decrease m_size;   
         if (m_size > 0) {
-            m_elements -> ~T();
+            //m_elements -> ~T();
             for (int i = 1; i < m_size; ++i) {
                 m_elements[i-1] = std::move(m_elements[i]);
             }
@@ -189,14 +189,26 @@ public:
         return array_iterator<T>(m_elements + m_size);
     }
 
-    //TODO
     //remove specified element
-    // invalidate iterate and all after
-    void erase(const array_iterator<T>&);
+    void erase(const array_iterator<T>& ai) {
+        // remove element a iterator location, move other elements left
+	array_iterator<T> end(this->end());
+	array_iterator<T> it(ai);
+	++it;
+	while(it != end) {
+            *(it.m_current - 1) = std::move(*it.m_current);
+	    ++it;
+	}
+	--m_size;
+        m_elements[m_size].~T();
+	
+    }
 
     //TODO
     //insert element right before itr
-    void insert(const T&, const array_iterator<T>&);
+    void insert(const T& t, const array_iterator<T>& it) {
+        // move elements right by 1 and insert value
+    }
 
     //Copy Assignment operator overload
     array& operator=(const array& rhs) {
@@ -220,6 +232,7 @@ public:
         }
         return *this;
     }
+    //TODO Extra credit for push_back(const T&&)
 private:
     T* m_elements;              //points to actual elements
     std::size_t m_size;              //number of elements
@@ -265,6 +278,7 @@ public:
     bool operator == (const array_iterator& rhs) const {
         return (m_current == rhs.m_current);
     }
+
 
 private:
     T* m_current;
