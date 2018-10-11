@@ -304,13 +304,13 @@ int main() {
         std::cout << "-------\n";
     
         simple_string::initialize_counts();
-        array<simple_string> test_arr(1);
+        array<simple_string> test_arr(2);
         array<simple_string> test_arr1(test_arr);
         test_arr1 = std::move(test_arr);
         simple_string::print_counts();
 
         array<simple_string> arrwasd(2);
-        bool temp_bool = (test_arr.begin() == test_arr.end());
+        bool temp_bool = (test_arr.begin()++ == test_arr.end());
         std::cout << temp_bool << std::endl;
 
     }    

@@ -55,11 +55,11 @@ public:
     //construct with n copies of t
     // TODO might need to change m_reserved_size(n)
     array(std::size_t n, const T& t) : m_size(n), m_reserved_size(INIT_RES_SIZE) {
-    if (n > INIT_RES_SIZE) {
-        m_reserved_size = n;
-    }
+        if (n > INIT_RES_SIZE) {
+            m_reserved_size = n;
+        }
 
-    m_elements = (T*)malloc(sizeof(T) * m_reserved_size);
+        m_elements = (T*)malloc(sizeof(T) * m_reserved_size);
         for (int i = 0; i < m_size; ++i) {
             new (m_elements + i) T(t);
         }
@@ -94,7 +94,6 @@ public:
     void push_back(const T& t) {
         if (m_size == m_reserved_size) {
             reserve(m_reserved_size * 2);
-            //TODO should call reserve correctly 0 1 2 4 8
         }
         new (m_elements + m_size) T(t);
         ++m_size;
@@ -123,8 +122,8 @@ public:
         // up to ~T() to clear up memory and change assocciated variables.
         // Skipping nullptr check since array always initializes and calls malloc()
         if (m_size > 0) {
-            m_elements[m_size - 1].~T();
             --m_size;
+            m_elements[m_size].~T();
         }
     }
 
@@ -174,7 +173,6 @@ public:
 
     //remove all elements
     void clear() {
-        // Call destructor on every element and change m_size to 0;
         for (int i = 0; i < m_size; ++i) {
             m_elements[i].~T();
         }
@@ -182,15 +180,13 @@ public:
     }
 
     //obtain iterator to first element
-    //TODO
     array_iterator<T> begin() const {
         return array_iterator<T>(m_elements);
     }
 
     //obtain iterator to one beyond element
-    //TODO
     array_iterator<T> end() const {
-        return array_iterator<T>(m_elements + m_size - 1);
+        return array_iterator<T>(m_elements + m_size);
     }
 
     //TODO
@@ -200,7 +196,6 @@ public:
 
     //TODO
     //insert element right before itr
-    // TODO if resize all iterators invalid, invalidate iterators after instert
     void insert(const T&, const array_iterator<T>&);
 
     //Copy Assignment operator overload
