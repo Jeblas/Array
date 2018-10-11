@@ -192,16 +192,16 @@ public:
     //remove specified element
     void erase(const array_iterator<T>& ai) {
         // remove element a iterator location, move other elements left
-	array_iterator<T> end(this->end());
-	array_iterator<T> it(ai);
-	++it;
-	while(it != end) {
+        array_iterator<T> end(this->end());
+        array_iterator<T> it(ai);
+        ++it;
+        while(it != end) {
             *(it.m_current - 1) = std::move(*it.m_current);
-	    ++it;
-	}
-	--m_size;
+            ++it;
+        }
+        --m_size;
         m_elements[m_size].~T();
-	
+        
     }
 
     //TODO
