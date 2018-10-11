@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-constexpr std::size_t INIT_RES_SIZE = 16;
+constexpr std::size_t INIT_RES_SIZE = 1;
 
 template<typename T> class array_iterator;
 
@@ -15,7 +15,7 @@ public:
     }
 
     //initialize array with elements in initializer
-    // initial reserved size = m_size
+    // initial reserved size = m_size. This is what vector does.
     array(std::initializer_list<T> init_list) : m_size(init_list.size()), m_reserved_size(init_list.size()) {
 	if (m_size > m_reserved_size) {
 	    m_reserved_size = m_size;
@@ -39,7 +39,6 @@ public:
     }
 
     //move constructor
-    // TODO should destruct old elements
     array(array&& rhs) : m_size(rhs.m_size), m_reserved_size(rhs.m_reserved_size), m_elements(rhs.m_elements) {
 	rhs.m_elements = nullptr;
     }
@@ -47,13 +46,14 @@ public:
     //construct with initial "reserved" size
     array(std::size_t num_res) : m_size(num_res), m_reserved_size(num_res) {
         m_elements = (T*)malloc(sizeof(T) * m_reserved_size);
-	//TODO seems as though vector creates a default constructor
+	// Vector populates elements with a default constructor.
 	for (int i = 0; i < m_size; ++i) {
 	     new (m_elements + i) T();
 	}
     }
 
     //construct with n copies of t
+    // TODO might need to change m_reserved_size(n)
     array(std::size_t n, const T& t) : m_size(n), m_reserved_size(INIT_RES_SIZE) {
 	if (n > INIT_RES_SIZE) {
 	    m_reserved_size = n;
@@ -78,18 +78,15 @@ public:
     //ensure enough memory for n elements
     void reserve(std::size_t n) {
 	if (n > m_reserved_size) {
-        // TODO invalidate iterator
-	    // TODO call move operator instead of copy operator	
 	    T* old_elements = m_elements;
 	    m_reserved_size = n;
 	    m_elements = (T*)malloc(sizeof(T) * n);
 
-	    // Copy or move elements into 
 	    for (int i = 0; i < m_size; ++i) {
-	        new (m_elements + i) T(old_elements[i]);
-		//old_elements[i].~T();
+	        new (m_elements + i) T(std::move(old_elements[i]));
+		old_elements[i].~T();
 	    }
-	    //free(old_elements);
+	    free(old_elements);
 	}
     }
 
@@ -97,10 +94,8 @@ public:
     void push_back(const T& t) {
         if (m_size == m_reserved_size) {
 	     reserve(m_reserved_size * 2);
-
+        //TODO should call reserve correctly 0 1 2 4 8
         }
-        //TODO invalidate end() iterator
-	// Add new element to the back of m_elements
         new (m_elements + m_size) T(t);
 	++m_size;
     }
@@ -134,15 +129,15 @@ public:
     }
 
     //remove first element
-    //TODO
     void pop_front() {
         //Call destructor, shift array to left, decrease m_size;   
 	if (m_size > 0) {
 	    m_elements -> ~T();
 	    for (int i = 1; i < m_size; ++i) {
-	        m_elements[i-1] = m_elements[i];
+	        m_elements[i-1] = std::move(m_elements[i]);
 	    }
 	    --m_size;
+	    m_elements[m_size].~T();
 	}
     }
 
@@ -204,7 +199,7 @@ public:
     // TODO if resize all iterators invalid, invalidate iterators after instert
     void insert(const T&, const array_iterator<T>&);
 
-    // TODO Add copy operator overload
+    //Copy Assignment operator overload
     array& operator=(const array& rhs) {
         if (this != &rhs) {
 	    m_size = rhs.size;
@@ -216,7 +211,7 @@ public:
 	}
 	return *this;
     }
-    // TODO Add move operator overload
+    //Move assignment operator overload
     array& operator=(array&& rhs) {
         if (this != &rhs) {
 	    m_size = rhs.m_size;

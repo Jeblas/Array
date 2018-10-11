@@ -11,9 +11,9 @@
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 //comment/uncomment these lines to enable tests
-//#define TEST_PUSH_BACK_NEW_VEC
+#define TEST_PUSH_BACK_NEW_VEC
 //#define TEST_CLEAR
-#define TEST_PUSH_FRONT_VEC
+//#define TEST_PUSH_FRONT_VEC
 //#define TEST_PUSH_FRONT_WITH_RESERVE
 //#define TEST_POP_BACK
 //#define TEST_INITIALIZER_LIST
@@ -204,11 +204,15 @@ int main() {
         simple_string::initialize_counts();
         vector<simple_string> vec;
         vec.push_back(a);
+        vec.push_back(a);
+        vec.push_back(a);
         simple_string::print_counts();
 
         std::cout << "Array" << std::endl;
         simple_string::initialize_counts();
         array<simple_string> arr;
+        arr.push_back(a);
+        arr.push_back(a);
         arr.push_back(a);
         simple_string::print_counts();
     }
