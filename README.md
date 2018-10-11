@@ -7,3 +7,7 @@
 - TODO check to confirm that destucts are called when makeing a copy of m_elements
 
 
+// Pre
+    array_iterator operator++() {...}
+// Post
+    array_iterator operator++(int __unused) {...}

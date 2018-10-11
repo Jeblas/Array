@@ -11,14 +11,14 @@
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 //comment/uncomment these lines to enable tests
-#define TEST_PUSH_BACK_NEW_VEC
+//define TEST_PUSH_BACK_NEW_VEC
 //#define TEST_CLEAR
 //#define TEST_PUSH_FRONT_VEC
 //#define TEST_PUSH_FRONT_WITH_RESERVE
 //#define TEST_POP_BACK
 //#define TEST_INITIALIZER_LIST
 //#define TEST_POP_FRONT
-//#define TEST_INITIALIZER_CONSTRUCTOR
+#define TEST_INITIALIZER_CONSTRUCTOR
 
 using std::vector;
 //test your code here
@@ -246,10 +246,10 @@ int main() {
         array<simple_string> arr({a, b});
         simple_string::print_counts();
 
-	std::cout << vec[0] << std::endl;
-	std::cout << vec[1] << std::endl;
-	std::cout << arr[0] << std::endl;
-	std::cout << arr[1] << std::endl;
+        std::cout << vec[0] << std::endl;
+        std::cout << vec[1] << std::endl;
+        std::cout << arr[0] << std::endl;
+        std::cout << arr[1] << std::endl;
     }
 #endif
 
@@ -267,7 +267,7 @@ int main() {
     //Move Assign: 0          Move Assign: 0
 
     {
-	simple_string a("wasd");
+        simple_string a("wasd");
         simple_string b("dsaw");
         simple_string c;
  
@@ -286,31 +286,34 @@ int main() {
         simple_string::initialize_counts();
         array<simple_string> arr1(arr);
         simple_string::print_counts();
-        	
-	std::cout << vec1[0] << std::endl;
-	std::cout << vec1[1] << std::endl;
-	std::cout << arr1.front() << std::endl;
-	std::cout << arr1.back() << std::endl;
-        std::cout << "\a" << std::endl;	
+            
+        std::cout << vec1[0] << std::endl;
+        std::cout << vec1[1] << std::endl;
+        std::cout << arr1.front() << std::endl;
+        std::cout << arr1.back() << std::endl;
+        std::cout << "\a" << std::endl;    
 
-	std::cout << "-------\n";
-	
+        std::cout << "-------\n";
+    
         simple_string::initialize_counts();
-	vector<simple_string> test_vec(5);
+        vector<simple_string> test_vec(5);
         vector<simple_string> test_vec1(test_vec);
-	//test_vec1 = std::move(test_vec);
-	simple_string::print_counts();
+        //test_vec1 = std::move(test_vec);
+        simple_string::print_counts();
 
-	std::cout << "-------\n";
-	
+        std::cout << "-------\n";
+    
         simple_string::initialize_counts();
-	array<simple_string> test_arr(5);
+        array<simple_string> test_arr(1);
         array<simple_string> test_arr1(test_arr);
-	test_arr1 = std::move(test_arr);
-	simple_string::print_counts();
+        test_arr1 = std::move(test_arr);
+        simple_string::print_counts();
 
-	array<simple_string> arrwasd
-    }	
+        array<simple_string> arrwasd(2);
+        bool temp_bool = (test_arr.begin() == test_arr.end());
+        std::cout << temp_bool << std::endl;
+
+    }    
     
 #endif
 
