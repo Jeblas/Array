@@ -13,12 +13,12 @@
 //comment/uncomment these lines to enable tests
 //#define TEST_PUSH_BACK_NEW_VEC
 //#define TEST_CLEAR
-//#define TEST_PUSH_FRONT_VEC
+#define TEST_PUSH_FRONT_VEC
 //#define TEST_PUSH_FRONT_WITH_RESERVE
 //#define TEST_POP_BACK
 //#define TEST_INITIALIZER_LIST
 //#define TEST_POP_FRONT
-#define TEST_INITIALIZER_CONSTRUCTOR
+//#define TEST_INITIALIZER_CONSTRUCTOR
 
 using std::vector;
 //test your code here
@@ -288,6 +288,24 @@ int main() {
 	std::cout << arr1.front() << std::endl;
 	std::cout << arr1.back() << std::endl;
         std::cout << "\a" << std::endl;	
+
+	std::cout << "-------\n";
+	
+        simple_string::initialize_counts();
+	vector<simple_string> test_vec(5);
+        vector<simple_string> test_vec1(test_vec);
+	//test_vec1 = std::move(test_vec);
+	simple_string::print_counts();
+
+	std::cout << "-------\n";
+	
+        simple_string::initialize_counts();
+	array<simple_string> test_arr(5);
+        array<simple_string> test_arr1(test_arr);
+	test_arr1 = std::move(test_arr);
+	simple_string::print_counts();
+
+	array<simple_string> arrwasd
     }	
     
 #endif

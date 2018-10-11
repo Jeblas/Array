@@ -4,8 +4,6 @@
 
 constexpr std::size_t INIT_RES_SIZE = 16;
 
-//using size_t = std::size_t;
-
 template<typename T> class array_iterator;
 
 template<typename T>
@@ -41,13 +39,18 @@ public:
     }
 
     //move constructor
+    // TODO should destruct old elements
     array(array&& rhs) : m_size(rhs.m_size), m_reserved_size(rhs.m_reserved_size), m_elements(rhs.m_elements) {
 	rhs.m_elements = nullptr;
     }
 
     //construct with initial "reserved" size
-    array(std::size_t num_res) : m_size(0), m_reserved_size(num_res) {
+    array(std::size_t num_res) : m_size(num_res), m_reserved_size(num_res) {
         m_elements = (T*)malloc(sizeof(T) * m_reserved_size);
+	//TODO seems as though vector creates a default constructor
+	for (int i = 0; i < m_size; ++i) {
+	     new (m_elements + i) T();
+	}
     }
 
     //construct with n copies of t
@@ -202,7 +205,7 @@ public:
     void insert(const T&, const array_iterator<T>&);
 
     // TODO Add copy operator overload
-    T& operator=(const T& rhs) {
+    array& operator=(const array& rhs) {
         if (this != &rhs) {
 	    m_size = rhs.size;
 	    m_reserved_size = rhs.m_reserved_size;
@@ -214,7 +217,7 @@ public:
 	return *this;
     }
     // TODO Add move operator overload
-    T& operator=(T&& rhs) {
+    array& operator=(array&& rhs) {
         if (this != &rhs) {
 	    m_size = rhs.m_size;
 	    m_reserved_size = rhs.m_reserved_size;
