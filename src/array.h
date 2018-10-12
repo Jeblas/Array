@@ -212,32 +212,36 @@ public:
     //TODO
     //insert element right before itr
     void insert(const T& t, const array_iterator<T>& ai) {
-        // move elements right by 1 and insert value
-        array_iterator<T> it(ai);
-        if (m_size == m_reserved_size) {
+        std::size_t index = (ai.m_current - m_elements);
+	        std::cout << m_elements << std::endl;
+	        std::cout << ai.m_current << std::endl;
+	        std::cout << index << std::endl;
+        
+	if (m_size == m_reserved_size) {
             T* old_elements = m_elements;
             m_reserved_size *= 2;
             m_elements = (T*)malloc(sizeof(T) * m_reserved_size);
             
-            std::size_t count= 0;
-            for (array_iterator<T> it(ai); it != ai; ++it) {
-                //move each element from the old_element to
-        //        new (m_elements)
+	    for (std::size_t i = 0; i < index; ++i) {
+                new (m_elements + i) T(std::move(old_elements[i]));
+		old_elements[i].~T();
             }
+	    new (m_elements + index) T(t);
 
+	    for (std::size_t i = m_size; i > index; --i) {
+		new (m_elements + i) T(std::move(old_elements[i - 1]));
+		old_elements[i - 1].~T();
+	    }
 
-            for (std::size_t i = m_size; i>0; --i) {
-                new (m_elements + i) T(std::move(old_elements[i - 1]));
-                m_elements[i - 1].~T();
-            }
             free(old_elements);
         } else {
-            for (std::size_t i = m_size; i>0; --i) {
-                new (m_elements + i) T(std::move(m_elements[i - 1]));
+            for (std::size_t i = m_size; i > index; --i) {
+                //new (m_elements + i) T(std::move(m_elements[i - 1]));
+		m_elements[i] = std::move(m_elements[i - 1]);
                 m_elements[i - 1].~T();
             }
+	    new (m_elements + index) T(t);
         }
-        new (m_elements) T(t);
         ++m_size;
     }
 

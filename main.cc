@@ -19,6 +19,7 @@
 #define TEST_INITIALIZER_LIST
 #define TEST_POP_FRONT
 //#define TEST_INITIALIZER_CONSTRUCTOR
+#define TEST_1
 
 using std::vector;
 //test your code here
@@ -333,6 +334,55 @@ int main() {
 
     }    
     
+#endif
+#ifdef TEST_1
+    //Vector                Array
+    //Default: 0            Default: 0
+    //Create: 0             Create: 0
+    //Copy: 0               Copy: 0
+    //Assign: 0             Assign: 0
+    //Destruct: 1           Destruct: 1
+    //Move Construct: 0     Move Construct: 0
+    //Move Assign: 0        Move Assign: 0
+    {
+
+        simple_string a("Goober");
+        simple_string b("Gaaber");
+        simple_string c("Geeber");
+
+        std::cout << "Vector" << std::endl;
+        vector<simple_string> vec;
+	std::cout << vec.capacity() << std::endl;
+	vec.push_back(a);
+	vec.push_back(c);
+	vec.push_back(c);
+	std::cout << vec.size() << std::endl;
+        simple_string::initialize_counts();
+        vec.insert(++(++vec.begin()), b);
+        simple_string::print_counts();
+	for (int i = 0; i < vec.size(); ++i) {
+		std::cout << vec[i] << std::endl;
+	}
+
+
+	std::cout << "test" << std::endl;
+
+        std::cout << "Array" << std::endl;
+        array<simple_string> arr;
+	//std::cout << arr.length() << std::endl;
+        arr.push_back(a);
+        arr.push_back(c);
+        arr.push_back(c);
+	std::cout << arr.length() << std::endl;
+        simple_string::initialize_counts();
+	std::cout << "test"<< std::endl;
+        arr.insert(b,++(++arr.begin()));
+        simple_string::print_counts();
+	for (int i = 0; i < arr.length(); ++i) {
+		std::cout << arr[i] << std::endl;
+	}
+
+    }
 #endif
 
     return 0;
