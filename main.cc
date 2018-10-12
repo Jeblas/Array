@@ -11,14 +11,14 @@
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 //comment/uncomment these lines to enable tests
-//#define TEST_PUSH_BACK_NEW_VEC
-//#define TEST_CLEAR
-//#define TEST_PUSH_FRONT_VEC
-//#define TEST_PUSH_FRONT_WITH_RESERVE
-//#define TEST_POP_BACK
-//#define TEST_INITIALIZER_LIST
-//#define TEST_POP_FRONT
-#define TEST_INITIALIZER_CONSTRUCTOR
+#define TEST_PUSH_BACK_NEW_VEC
+#define TEST_CLEAR
+#define TEST_PUSH_FRONT_VEC
+#define TEST_PUSH_FRONT_WITH_RESERVE
+#define TEST_POP_BACK
+#define TEST_INITIALIZER_LIST
+#define TEST_POP_FRONT
+//#define TEST_INITIALIZER_CONSTRUCTOR
 
 using std::vector;
 //test your code here
