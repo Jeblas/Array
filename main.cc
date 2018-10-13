@@ -11,15 +11,16 @@
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 //comment/uncomment these lines to enable tests
-#define TEST_PUSH_BACK_NEW_VEC
-#define TEST_CLEAR
-#define TEST_PUSH_FRONT_VEC
-#define TEST_PUSH_FRONT_WITH_RESERVE
-#define TEST_POP_BACK
-#define TEST_INITIALIZER_LIST
-#define TEST_POP_FRONT
+//#define TEST_PUSH_BACK_NEW_VEC
+//#define TEST_CLEAR
+//#define TEST_PUSH_FRONT_VEC
+//#define TEST_PUSH_FRONT_WITH_RESERVE
+//#define TEST_POP_BACK
+//#define TEST_INITIALIZER_LIST
+//#define TEST_POP_FRONT
 //#define TEST_INITIALIZER_CONSTRUCTOR
-#define TEST_1
+//#define TEST_1
+#define TEST_2
 
 using std::vector;
 //test your code here
@@ -358,7 +359,7 @@ int main() {
 	vec.push_back(c);
 	std::cout << vec.size() << std::endl;
         simple_string::initialize_counts();
-        vec.insert(++(++vec.begin()), b);
+        vec.insert(++(vec.begin()), b);
         simple_string::print_counts();
 	for (int i = 0; i < vec.size(); ++i) {
 		std::cout << vec[i] << std::endl;
@@ -380,6 +381,55 @@ int main() {
         simple_string::print_counts();
 	for (int i = 0; i < arr.length(); ++i) {
 		std::cout << arr[i] << std::endl;
+	}
+
+    }
+#endif
+#ifdef TEST_2
+    //Vector                Array
+    //Default: 0            Default: 0
+    //Create: 0             Create: 0
+    //Copy: 0               Copy: 0
+    //Assign: 0             Assign: 0
+    //Destruct: 1           Destruct: 1
+    //Move Construct: 0     Move Construct: 0
+    //Move Assign: 0        Move Assign: 0
+    {
+
+        simple_string a("Goober");
+        simple_string b("Gaaber");
+        simple_string c("Geeber");
+
+        std::cout << "--Vector--" << std::endl;
+        simple_string::initialize_counts();
+        vector<simple_string> vec(3,b);
+        vector<simple_string> vec1(std::move(vec));
+//	vec1.reserve(6);
+	vec1.push_back(a);
+	vec1[0] = vec1[3];
+	//vec.insert(vec1.begin(), c);
+	vec1.erase(vec1.begin());
+        simple_string::print_counts();
+	std::cout << vec.size() << std::endl;
+
+        std::cout << "--Array--" << std::endl;
+        simple_string::initialize_counts();
+        array<simple_string> arr(3,b);
+        array<simple_string> arr1(std::move(arr));
+	//arr1.reserve(15);
+	arr1.push_back(a);
+	arr1[0] = arr1.back();
+	//arr1.push_front(c);
+	//arr1.pop_front();
+	arr1.erase(++arr1.begin());
+	//arr1.clear();
+        simple_string::print_counts();
+	std::cout << arr.length() << std::endl;
+
+	auto it = arr1.begin();
+	while (it != arr1.end()) {
+	    std::cout << *it << std::endl;
+	    it++;
 	}
 
     }

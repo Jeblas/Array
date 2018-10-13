@@ -41,6 +41,8 @@ public:
     //move constructor
     array(array&& rhs) : m_size(rhs.m_size), m_reserved_size(rhs.m_reserved_size), m_elements(rhs.m_elements) {
         rhs.m_elements = nullptr;
+	rhs.m_size = 0;1
+	rhs.m_reserved_size = 0;
     }
 
     //construct with initial "reserved" size
@@ -53,9 +55,8 @@ public:
     }
 
     //construct with n copies of t
-    // TODO might need to change m_reserved_size(n)
     array(std::size_t n, const T& t) : m_size(n), m_reserved_size(INIT_RES_SIZE) {
-        if (n > INIT_RES_SIZE) {
+	if (n > INIT_RES_SIZE) {
             m_reserved_size = n;
         }
 
@@ -76,9 +77,8 @@ public:
     }
 
     //ensure enough memory for n elements
-    // TODO Does m_size = n?
     void reserve(std::size_t n) {
-        if (n > m_reserved_size) {
+        if (n > m_reserved_size && m_elements != nullptr) {
             T* old_elements = m_elements;
             m_reserved_size = n;
             m_elements = (T*)malloc(sizeof(T) * n);
@@ -93,6 +93,10 @@ public:
 
     //add to end of vector
     void push_back(const T& t) {
+	if (m_elements == nullptr) {
+            m_elements = (T*)malloc(sizeof(T));
+	    m_reserved_size = 1;
+	}
         if (m_size == m_reserved_size) {
             reserve(m_reserved_size * 2);
         }
@@ -103,6 +107,7 @@ public:
     //add to front of vector
     void push_front(const T& t) {
         if (m_size == m_reserved_size) {
+	    //might be more efficient  to do new_elements and assign to m_elements after
             T* old_elements = m_elements;
             m_reserved_size *= 2;
             m_elements = (T*)malloc(sizeof(T) * m_reserved_size);
@@ -126,6 +131,7 @@ public:
     void pop_back() {
         // up to ~T() to clear up memory and change assocciated variables.
         // Skipping nullptr check since array always initializes and calls malloc()
+	// Once one state where nullptr is set and m_size is also set to 0 
         if (m_size > 0) {
             --m_size;
             m_elements[m_size].~T();
