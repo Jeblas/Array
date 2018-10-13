@@ -15,16 +15,16 @@ public:
     }
 
     //initialize array with elements in initializer
-    // initial reserved size = m_size. This is what vector does.
+    //initial reserved size = m_size. This is what vector does.
     array(std::initializer_list<T> init_list) : m_size(init_list.size()), m_reserved_size(init_list.size()) {
-        if (m_size > m_reserved_size) {
-            m_reserved_size = m_size;
-        }
+        //if (m_size > m_reserved_size) {
+        //    m_reserved_size = m_size;
+        //}
         m_elements = (T*)malloc(sizeof(T) * m_reserved_size);
         typename std::initializer_list<T>::iterator it;
         std::size_t i = 0;
         for (it = init_list.begin(); it != init_list.end(); ++it) {
-            //TODO Copy T() or move T()??
+            //Should I Copy T() or move T()??
             new (m_elements + i) T(*it);
             ++i;
         }
@@ -41,7 +41,7 @@ public:
     //move constructor
     array(array&& rhs) : m_size(rhs.m_size), m_reserved_size(rhs.m_reserved_size), m_elements(rhs.m_elements) {
         rhs.m_elements = nullptr;
-	rhs.m_size = 0;1
+	rhs.m_size = 0;
 	rhs.m_reserved_size = 0;
     }
 
@@ -215,13 +215,9 @@ public:
         
     }
 
-    //TODO
     //insert element right before itr
     void insert(const T& t, const array_iterator<T>& ai) {
         std::size_t index = (ai.m_current - m_elements);
-	        std::cout << m_elements << std::endl;
-	        std::cout << ai.m_current << std::endl;
-	        std::cout << index << std::endl;
         
 	if (m_size == m_reserved_size) {
             T* old_elements = m_elements;
@@ -242,7 +238,6 @@ public:
             free(old_elements);
         } else {
             for (std::size_t i = m_size; i > index; --i) {
-                //new (m_elements + i) T(std::move(m_elements[i - 1]));
 		m_elements[i] = std::move(m_elements[i - 1]);
                 m_elements[i - 1].~T();
             }
@@ -273,7 +268,7 @@ public:
         }
         return *this;
     }
-    //TODO Extra credit for push_back(const T&&)
+    //Extra credit for push_back(const T&&)
 private:
     T* m_elements;              //points to actual elements
     std::size_t m_size;              //number of elements

@@ -408,7 +408,7 @@ int main() {
 	vec1.push_back(a);
 	vec1[0] = vec1[3];
 	//vec.insert(vec1.begin(), c);
-	vec1.erase(vec1.begin());
+	//vec.erase(vec1.begin());
         simple_string::print_counts();
 	std::cout << vec.size() << std::endl;
 
@@ -421,7 +421,7 @@ int main() {
 	arr1[0] = arr1.back();
 	//arr1.push_front(c);
 	//arr1.pop_front();
-	arr1.erase(++arr1.begin());
+	//arr.erase(++arr1.begin());
 	//arr1.clear();
         simple_string::print_counts();
 	std::cout << arr.length() << std::endl;
